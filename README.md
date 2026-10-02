@@ -2,7 +2,7 @@
 
 A focused React and Vite revision workspace for C++ syntax, object-oriented programming, memory management, STL, concurrency, and modern development fundamentals.
 
-![C++ Core Notes screenshot](screenshot.png)
+![C++ Core Notes screenshot](./screenshot.jpg)
 
 ## Features
 
