@@ -15,7 +15,7 @@ import {
 import { FaBug } from "react-icons/fa";
 
 const CompilationBuildSystems = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const toggle = () => setOpen((v) => !v);
 
@@ -25,7 +25,7 @@ const CompilationBuildSystems = () => {
                 type="button"
                 className="topicHeader"
                 onClick={toggle}
-                aria-expanded={open}
+                aria-controls="cpp-compilationBuildSystems-panel" aria-expanded={open}
             >
                 <span className="chev">
                     {open ? <FiChevronDown /> : <FiChevronRight />}
@@ -40,7 +40,7 @@ const CompilationBuildSystems = () => {
                 <span className="meta">{open ? "Collapse" : "Expand"}</span>
             </button>
 
-            <div className={`topicBody ${open ? "open" : ""}`}>
+            <div id="cpp-compilationBuildSystems-panel" aria-hidden={!open} className={`topicBody ${open ? "open" : ""}`}>
                 <div className="intro">
                     <p className="p">
                         In C++, writing code is only half the story. The other

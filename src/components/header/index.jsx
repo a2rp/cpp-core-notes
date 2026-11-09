@@ -1,5 +1,5 @@
 // Header.jsx
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Styled } from "./styled";
 import { FiMoon, FiSun } from "react-icons/fi";
 
@@ -7,20 +7,15 @@ const logo = `${import.meta.env.BASE_URL}logo.png`;
 
 const Header = () => {
     const [logoLoaded, setLogoLoaded] = useState(false);
-    const [theme, setTheme] = useState("dark");
-
-    // Initialize theme from localStorage or default
-    useEffect(() => {
-        const storedTheme = localStorage.getItem("app-theme");
-        const initialTheme = storedTheme || "dark";
-        setTheme(initialTheme);
-
-        if (initialTheme === "light") {
-            document.documentElement.setAttribute("data-theme", "light");
-        } else {
-            document.documentElement.removeAttribute("data-theme");
+    const [theme, setTheme] = useState(() => {
+        try {
+            const storedTheme = localStorage.getItem("app-theme");
+            if (storedTheme === "light" || storedTheme === "dark") return storedTheme;
+        } catch {
+            // Browser storage may be unavailable.
         }
-    }, []);
+        return "dark";
+    });
 
     // Apply theme + persist
     useEffect(() => {
@@ -30,12 +25,14 @@ const Header = () => {
             document.documentElement.removeAttribute("data-theme");
         }
 
-        localStorage.setItem("app-theme", theme);
+        try {
+            localStorage.setItem("app-theme", theme);
+        } catch {
+            // Browser storage may be unavailable.
+        }
     }, [theme]);
 
-    const nextTheme = useMemo(() => {
-        return theme === "light" ? "dark" : "light";
-    }, [theme]);
+    const nextTheme = theme === "light" ? "dark" : "light";
 
     const handleToggle = () => {
         setTheme(nextTheme);

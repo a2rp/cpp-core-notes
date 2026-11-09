@@ -19,6 +19,7 @@
     "devDependencies": {
         "@vitejs/plugin-react": "^4.3.4",
         "gh-pages": "^6.1.1",
+        "rollup": "npm:@rollup/wasm-node@^4.68.2",
         "vite": "^6.2.0"
     }
 }

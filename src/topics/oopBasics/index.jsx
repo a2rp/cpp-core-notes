@@ -17,7 +17,7 @@ import {
 } from "react-icons/fi";
 
 const OopBasics = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const toggle = () => setOpen((v) => !v);
 
@@ -27,7 +27,7 @@ const OopBasics = () => {
                 type="button"
                 className="topicHeader"
                 onClick={toggle}
-                aria-expanded={open}
+                aria-controls="cpp-oopBasics-panel" aria-expanded={open}
             >
                 <span className="chev">
                     {open ? <FiChevronDown /> : <FiChevronRight />}
@@ -42,7 +42,7 @@ const OopBasics = () => {
                 <span className="meta">{open ? "Collapse" : "Expand"}</span>
             </button>
 
-            <div className={`topicBody ${open ? "open" : ""}`}>
+            <div id="cpp-oopBasics-panel" aria-hidden={!open} className={`topicBody ${open ? "open" : ""}`}>
                 <div className="intro">
                     <p className="p">
                         Object Oriented Programming (OOP) is a way to design

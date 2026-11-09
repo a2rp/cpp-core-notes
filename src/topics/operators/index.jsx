@@ -13,7 +13,7 @@ import {
 } from "react-icons/fi";
 
 const Operators = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const toggle = () => setOpen((v) => !v);
 
@@ -23,7 +23,7 @@ const Operators = () => {
                 type="button"
                 className="topicHeader"
                 onClick={toggle}
-                aria-expanded={open}
+                aria-controls="cpp-operators-panel" aria-expanded={open}
             >
                 <span className="chev">
                     {open ? <FiChevronDown /> : <FiChevronRight />}
@@ -38,7 +38,7 @@ const Operators = () => {
                 <span className="meta">{open ? "Collapse" : "Expand"}</span>
             </button>
 
-            <div className={`topicBody ${open ? "open" : ""}`}>
+            <div id="cpp-operators-panel" aria-hidden={!open} className={`topicBody ${open ? "open" : ""}`}>
                 <div className="intro">
                     <p className="p">
                         Operators are symbols that tell C++ to perform an action

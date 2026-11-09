@@ -14,7 +14,7 @@ import {
 } from "react-icons/fi";
 
 const AdvancedConcepts = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const toggle = () => setOpen((v) => !v);
 
@@ -24,7 +24,7 @@ const AdvancedConcepts = () => {
                 type="button"
                 className="topicHeader"
                 onClick={toggle}
-                aria-expanded={open}
+                aria-controls="cpp-advancedConcepts-panel" aria-expanded={open}
             >
                 <span className="chev">
                     {open ? <FiChevronDown /> : <FiChevronRight />}
@@ -39,7 +39,7 @@ const AdvancedConcepts = () => {
                 <span className="meta">{open ? "Collapse" : "Expand"}</span>
             </button>
 
-            <div className={`topicBody ${open ? "open" : ""}`}>
+            <div id="cpp-advancedConcepts-panel" aria-hidden={!open} className={`topicBody ${open ? "open" : ""}`}>
                 <div className="intro">
                     <p className="p">
                         These concepts are what make C++ feel "serious". If you
@@ -152,21 +152,22 @@ int main() {
                         Memory model basics
                     </h3>
                     <p className="p">
-                        C++ programs use memory in different regions - stack,
-                        heap, global or static storage, and code segment.
-                        Understanding where data lives helps you avoid leaks and
-                        crashes. In multithreading, the C++ memory model also
-                        defines how threads see shared values.
+                        C++ defines storage duration and object lifetime rather
+                        than requiring a physical memory layout. Common
+                        implementations use regions often called stack, heap,
+                        static storage, and code. The C++ memory model also
+                        defines how threads observe shared values.
                     </p>
 
                     <ul className="bullets">
                         <li>
                             <span className="dot" />
-                            Stack - automatic storage, fast, limited size
+                            Automatic storage - often implemented with a stack
                         </li>
                         <li>
                             <span className="dot" />
-                            Heap - dynamic allocation, flexible, must be managed
+                            Dynamic storage - commonly called the heap; manage
+                            it with RAII
                         </li>
                         <li>
                             <span className="dot" />
@@ -177,6 +178,10 @@ int main() {
                             Code segment - compiled instructions
                         </li>
                     </ul>
+                    <div className="hint">
+                        Stack, heap, and code segment are common implementation
+                        terms, not required C++ storage regions.
+                    </div>
                 </div>
 
                 <div className="section">
@@ -187,10 +192,11 @@ int main() {
                         Stack vs heap
                     </h3>
                     <p className="p">
-                        Stack memory is allocated and freed automatically when
-                        scopes enter and exit. Heap memory is allocated
-                        dynamically and lives until you free it or it is managed
-                        by an RAII object.
+                        Objects with automatic storage duration are destroyed
+                        when their scope ends. Objects with dynamic storage
+                        duration live until they are deallocated or their RAII
+                        owner is destroyed. Implementations commonly place
+                        these in stack and heap regions, respectively.
                     </p>
 
                     <div className="codeBlock">
@@ -202,9 +208,9 @@ int main() {
 #include <memory>
 
 int main() {
-  int a = 5; // stack
+  int a = 5; // automatic storage duration
 
-  // heap via RAII smart pointer
+  // dynamic storage managed by an RAII smart pointer
   auto p = std::make_unique<int>(99);
 
   std::cout << a << " " << *p << std::endl;

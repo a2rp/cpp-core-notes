@@ -12,7 +12,7 @@ import {
 } from "react-icons/fi";
 
 const FileHandling = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const toggle = () => setOpen((v) => !v);
 
@@ -22,7 +22,7 @@ const FileHandling = () => {
                 type="button"
                 className="topicHeader"
                 onClick={toggle}
-                aria-expanded={open}
+                aria-controls="cpp-fileHandling-panel" aria-expanded={open}
             >
                 <span className="chev">
                     {open ? <FiChevronDown /> : <FiChevronRight />}
@@ -37,7 +37,7 @@ const FileHandling = () => {
                 <span className="meta">{open ? "Collapse" : "Expand"}</span>
             </button>
 
-            <div className={`topicBody ${open ? "open" : ""}`}>
+            <div id="cpp-fileHandling-panel" aria-hidden={!open} className={`topicBody ${open ? "open" : ""}`}>
                 <div className="intro">
                     <p className="p">
                         File handling in C++ is done using stream classes from

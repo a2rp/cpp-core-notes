@@ -13,7 +13,7 @@ import {
 } from "react-icons/fi";
 
 const ArraysAndStrings = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const toggle = () => setOpen((v) => !v);
 
@@ -23,7 +23,7 @@ const ArraysAndStrings = () => {
                 type="button"
                 className="topicHeader"
                 onClick={toggle}
-                aria-expanded={open}
+                aria-controls="cpp-arraysAndStrings-panel" aria-expanded={open}
             >
                 <span className="chev">
                     {open ? <FiChevronDown /> : <FiChevronRight />}
@@ -38,7 +38,7 @@ const ArraysAndStrings = () => {
                 <span className="meta">{open ? "Collapse" : "Expand"}</span>
             </button>
 
-            <div className={`topicBody ${open ? "open" : ""}`}>
+            <div id="cpp-arraysAndStrings-panel" aria-hidden={!open} className={`topicBody ${open ? "open" : ""}`}>
                 <div className="intro">
                     <p className="p">
                         Arrays store multiple values in contiguous memory.
@@ -54,12 +54,14 @@ const ArraysAndStrings = () => {
                         <span className="hIcon">
                             <FiHash />
                         </span>
-                        Static arrays
+                        Fixed-size arrays
                     </h3>
                     <p className="p">
-                        Static arrays have fixed size decided at compile time.
-                        They live on the stack (most common) and cannot grow or
-                        shrink.
+                        Built-in arrays have a fixed number of elements
+                        specified by a constant expression. Local arrays
+                        commonly have automatic storage and may be placed on a
+                        stack, but the physical location is an implementation
+                        detail. Arrays cannot grow or shrink.
                     </p>
 
                     <div className="codeBlock">

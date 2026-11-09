@@ -13,7 +13,7 @@ import {
 } from "react-icons/fi";
 
 const ModernCppFeatures = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const toggle = () => setOpen((v) => !v);
 
@@ -23,7 +23,7 @@ const ModernCppFeatures = () => {
                 type="button"
                 className="topicHeader"
                 onClick={toggle}
-                aria-expanded={open}
+                aria-controls="cpp-modernCppFeatures-panel" aria-expanded={open}
             >
                 <span className="chev">
                     {open ? <FiChevronDown /> : <FiChevronRight />}
@@ -38,7 +38,7 @@ const ModernCppFeatures = () => {
                 <span className="meta">{open ? "Collapse" : "Expand"}</span>
             </button>
 
-            <div className={`topicBody ${open ? "open" : ""}`}>
+            <div id="cpp-modernCppFeatures-panel" aria-hidden={!open} className={`topicBody ${open ? "open" : ""}`}>
                 <div className="intro">
                     <p className="p">
                         Modern C++ (C++11 and later) makes C++ safer and more
@@ -166,9 +166,11 @@ int main() {
                         Move semantics
                     </h3>
                     <p className="p">
-                        Move semantics avoids expensive copies by transferring
-                        ownership of resources. std::move converts an lvalue
-                        into an rvalue so move operations can happen.
+                        Move semantics can avoid expensive copies by
+                        transferring resources. std::move is a cast that turns
+                        an expression into an xvalue, allowing overload
+                        resolution to select a move operation; it does not move
+                        resources by itself.
                     </p>
                     <div className="codeBlock">
                         <div className="codeTop">Example - std::move</div>
@@ -190,8 +192,9 @@ int main() {
                         </pre>
                     </div>
                     <div className="hint">
-                        Move does not delete data magically. It just allows the
-                        destination to "steal" resources from the source.
+                        The result depends on the type and selected operation.
+                        A moved-from standard library object remains valid but
+                        its value is unspecified unless documented otherwise.
                     </div>
                 </div>
 
