@@ -292,6 +292,7 @@ int main() {
 class Base {
 public:
   virtual void speak() { std::cout << "base\\n"; }
+  virtual ~Base() = default;
 };
 
 class Derived : public Base {

@@ -194,10 +194,14 @@ int main() {
                         Dynamic memory allocation - new and delete
                     </h3>
                     <p className="p">
-                        <code>new</code> allocates memory on the heap and
-                        returns a pointer. <code>delete</code> frees that
-                        memory. If you allocate an array with <code>new[]</code>
-                        , you must free with <code>delete[]</code>.
+                        A <code>new</code> expression creates an object with
+                        dynamic storage duration and returns a pointer to it.
+                        Implementations commonly use a heap for this storage,
+                        but that layout is not required by the language.
+                        {" "}<code>delete</code> destroys the object and releases
+                        its storage. Match <code>new[]</code> with{" "}
+                        <code>delete[]</code>; in application code, prefer RAII
+                        types such as <code>std::vector</code> and smart pointers.
                     </p>
 
                     <div className="codeBlock">

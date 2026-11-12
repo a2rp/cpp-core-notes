@@ -454,6 +454,7 @@ using namespace std;
 class Base {
 public:
   virtual void show() { cout << "Base show" << endl; }
+  virtual ~Base() = default;
 };
 
 class Derived : public Base {
